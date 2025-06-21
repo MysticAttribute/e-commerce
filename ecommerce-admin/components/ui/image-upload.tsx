@@ -12,9 +12,10 @@ interface ImageUploadProps {
     onChange: (value: string) => void;
     onRemove: (value: string) => void;
     value: string[];
+    singleImage?: boolean;
 }   
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ disabled, onChange, onRemove, value }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({ disabled, onChange, onRemove, value, singleImage = false }) => {
     
     const [isMounted, setIsMounted] = useState(false);
 
@@ -55,8 +56,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ disabled, onChange, onRemove,
                 ))}
             </div>
             <CldUploadWidget
-                onUpload={onUpload}
-                uploadPreset="fuuvz215"
+            uploadPreset="fuuvz215"
+            options={{
+                multiple: singleImage ? false : true,
+                maxFiles: singleImage ? 1 : undefined,
+            }}
+            {...(singleImage ? { onSuccess: onUpload } : { onUpload: onUpload })}
             >
                 {({ open }) => {
                     const onClick =() => {

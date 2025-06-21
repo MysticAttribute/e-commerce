@@ -111,6 +111,7 @@ export const BillboardForm: React.FC<SettingsFromProps> = ({ initialData }) => {
                                     <ImageUpload
                                         value={field.value ? [field.value] : []}
                                         disabled={loading}
+					singleImage
                                         onChange={(url) => field.onChange(url)}
                                         onRemove={() => field.onChange('')}
                                     />
